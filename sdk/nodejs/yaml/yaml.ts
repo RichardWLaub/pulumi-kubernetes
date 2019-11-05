@@ -552,6 +552,10 @@ import * as outputs from "../types/output";
         public getResource(groupVersionKind: "settings.k8s.io/v1alpha1/PodPreset", namespace: string, name: string): pulumi.Output<k8s.settings.v1alpha1.PodPreset>;
         public getResource(groupVersionKind: "settings.k8s.io/v1alpha1/PodPresetList", name: string): pulumi.Output<k8s.settings.v1alpha1.PodPresetList>;
         public getResource(groupVersionKind: "settings.k8s.io/v1alpha1/PodPresetList", namespace: string, name: string): pulumi.Output<k8s.settings.v1alpha1.PodPresetList>;
+        public getResource(groupVersionKind: "storage.k8s.io/v1/CSINode", name: string): pulumi.Output<k8s.storage.v1.CSINode>;
+        public getResource(groupVersionKind: "storage.k8s.io/v1/CSINode", namespace: string, name: string): pulumi.Output<k8s.storage.v1.CSINode>;
+        public getResource(groupVersionKind: "storage.k8s.io/v1/CSINodeList", name: string): pulumi.Output<k8s.storage.v1.CSINodeList>;
+        public getResource(groupVersionKind: "storage.k8s.io/v1/CSINodeList", namespace: string, name: string): pulumi.Output<k8s.storage.v1.CSINodeList>;
         public getResource(groupVersionKind: "storage.k8s.io/v1/StorageClass", name: string): pulumi.Output<k8s.storage.v1.StorageClass>;
         public getResource(groupVersionKind: "storage.k8s.io/v1/StorageClass", namespace: string, name: string): pulumi.Output<k8s.storage.v1.StorageClass>;
         public getResource(groupVersionKind: "storage.k8s.io/v1/StorageClassList", name: string): pulumi.Output<k8s.storage.v1.StorageClassList>;
@@ -2174,6 +2178,22 @@ import * as outputs from "../types/output";
         public getResourceProperty(groupVersionKind: "settings.k8s.io/v1alpha1/PodPresetList", namespace: string, name: string, property: "kind"): pulumi.Output<"PodPresetList">;
         public getResourceProperty(groupVersionKind: "settings.k8s.io/v1alpha1/PodPresetList", name: string, property: "metadata"): pulumi.Output<outputs.meta.v1.ListMeta>;
         public getResourceProperty(groupVersionKind: "settings.k8s.io/v1alpha1/PodPresetList", namespace: string, name: string, property: "metadata"): pulumi.Output<outputs.meta.v1.ListMeta>;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINode", name: string, property: "api_version"): pulumi.Output<"storage.k8s.io/v1">;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINode", namespace: string, name: string, property: "api_version"): pulumi.Output<"storage.k8s.io/v1">;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINode", name: string, property: "kind"): pulumi.Output<"CSINode">;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINode", namespace: string, name: string, property: "kind"): pulumi.Output<"CSINode">;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINode", name: string, property: "metadata"): pulumi.Output<outputs.meta.v1.ObjectMeta>;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINode", namespace: string, name: string, property: "metadata"): pulumi.Output<outputs.meta.v1.ObjectMeta>;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINode", name: string, property: "spec"): pulumi.Output<outputs.storage.v1.CSINodeSpec>;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINode", namespace: string, name: string, property: "spec"): pulumi.Output<outputs.storage.v1.CSINodeSpec>;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINodeList", name: string, property: "api_version"): pulumi.Output<"storage.k8s.io/v1">;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINodeList", namespace: string, name: string, property: "api_version"): pulumi.Output<"storage.k8s.io/v1">;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINodeList", name: string, property: "items"): pulumi.Output<outputs.storage.v1.CSINode[]>;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINodeList", namespace: string, name: string, property: "items"): pulumi.Output<outputs.storage.v1.CSINode[]>;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINodeList", name: string, property: "kind"): pulumi.Output<"CSINodeList">;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINodeList", namespace: string, name: string, property: "kind"): pulumi.Output<"CSINodeList">;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINodeList", name: string, property: "metadata"): pulumi.Output<outputs.meta.v1.ListMeta>;
+        public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/CSINodeList", namespace: string, name: string, property: "metadata"): pulumi.Output<outputs.meta.v1.ListMeta>;
         public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/StorageClass", name: string, property: "allow_volume_expansion"): pulumi.Output<boolean>;
         public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/StorageClass", namespace: string, name: string, property: "allow_volume_expansion"): pulumi.Output<boolean>;
         public getResourceProperty(groupVersionKind: "storage.k8s.io/v1/StorageClass", name: string, property: "allowed_topologies"): pulumi.Output<outputs.core.v1.TopologySelectorTerm[]>;
@@ -2555,6 +2575,7 @@ import * as outputs from "../types/output";
             || (apiVersion == "scheduling.k8s.io/v1alpha1" && kind == "PriorityClassList")
             || (apiVersion == "scheduling.k8s.io/v1beta1" && kind == "PriorityClassList")
             || (apiVersion == "settings.k8s.io/v1alpha1" && kind == "PodPresetList")
+            || (apiVersion == "storage.k8s.io/v1" && kind == "CSINodeList")
             || (apiVersion == "storage.k8s.io/v1" && kind == "StorageClassList")
             || (apiVersion == "storage.k8s.io/v1" && kind == "VolumeAttachmentList")
             || (apiVersion == "storage.k8s.io/v1alpha1" && kind == "VolumeAttachmentList")
@@ -3439,6 +3460,16 @@ import * as outputs from "../types/output";
                 return [id.apply(id => ({
                     name: `settings.k8s.io/v1alpha1/PodPresetList::${id}`,
                     resource: new k8s.settings.v1alpha1.PodPresetList(id, obj, opts),
+                }))];
+            case "storage.k8s.io/v1/CSINode":
+                return [id.apply(id => ({
+                    name: `storage.k8s.io/v1/CSINode::${id}`,
+                    resource: new k8s.storage.v1.CSINode(id, obj, opts),
+                }))];
+            case "storage.k8s.io/v1/CSINodeList":
+                return [id.apply(id => ({
+                    name: `storage.k8s.io/v1/CSINodeList::${id}`,
+                    resource: new k8s.storage.v1.CSINodeList(id, obj, opts),
                 }))];
             case "storage.k8s.io/v1/StorageClass":
                 return [id.apply(id => ({
