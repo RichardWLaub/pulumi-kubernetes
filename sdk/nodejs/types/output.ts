@@ -1341,7 +1341,7 @@ export namespace apiextensions {
 
       /**
        * scope indicates whether the defined custom resource is cluster- or namespace-scoped.
-       * Allowed values are `Cluster` and `Namespaced`. Default is `Namespaced`.
+       * Allowed values are `Cluster` and `Namespaced`.
        */
       readonly scope: string
 
@@ -1677,6 +1677,19 @@ export namespace apiextensions {
        * Defaults to atomic for arrays.
        */
       readonly x_kubernetes_list_type: string
+
+      /**
+       * x-kubernetes-map-type annotates an object to further describe its topology. This extension
+       * must only be used when type is object and may have 2 possible values:
+       * 
+       * 1) `granular`:
+       *      These maps are actual maps (key-value pairs) and each fields are independent
+       *      from each other (they can each be manipulated by separate actors). This is
+       *      the default behaviour for all maps.
+       * 2) `atomic`: the list is treated as a single entity, like a scalar.
+       *      Atomic maps will be entirely replaced when updated.
+       */
+      readonly x_kubernetes_map_type: string
 
       /**
        * x-kubernetes-preserve-unknown-fields stops the API server decoding step from pruning fields
@@ -2412,6 +2425,19 @@ export namespace apiextensions {
        * Defaults to atomic for arrays.
        */
       readonly x_kubernetes_list_type: string
+
+      /**
+       * x-kubernetes-map-type annotates an object to further describe its topology. This extension
+       * must only be used when type is object and may have 2 possible values:
+       * 
+       * 1) `granular`:
+       *      These maps are actual maps (key-value pairs) and each fields are independent
+       *      from each other (they can each be manipulated by separate actors). This is
+       *      the default behaviour for all maps.
+       * 2) `atomic`: the list is treated as a single entity, like a scalar.
+       *      Atomic maps will be entirely replaced when updated.
+       */
+      readonly x_kubernetes_map_type: string
 
       /**
        * x-kubernetes-preserve-unknown-fields stops the API server decoding step from pruning fields
@@ -15866,7 +15892,7 @@ export namespace core {
        * Expanded path within the volume from which the container's volume should be mounted.
        * Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded
        * using the container's environment. Defaults to "" (volume's root). SubPathExpr and SubPath
-       * are mutually exclusive. This field is beta in 1.15.
+       * are mutually exclusive.
        */
       readonly subPathExpr: string
 
@@ -15995,10 +16021,10 @@ export namespace discovery {
     export interface Endpoint {
       /**
        * addresses of this endpoint. The contents of this field are interpreted according to the
-       * corresponding EndpointSlice addressType field. This allows for cases like dual-stack (IPv4
-       * and IPv6) networking. Consumers (e.g. kube-proxy) must handle different types of addresses
-       * in the context of their own capabilities. This must contain at least one address but no
-       * more than 100.
+       * corresponding EndpointSlice addressType field. This allows for cases like dual-stack
+       * networking where both IPv4 and IPv6 addresses would be included with the IP addressType.
+       * Consumers (e.g. kube-proxy) must handle different types of addresses in the context of
+       * their own capabilities. This must contain at least one address but no more than 100.
        */
       readonly addresses: string[]
 
@@ -16085,7 +16111,10 @@ export namespace discovery {
     export interface EndpointSlice {
       /**
        * addressType specifies the type of address carried by this EndpointSlice. All addresses in
-       * this slice must be the same type. Default is IP
+       * this slice must be the same type. The following address types are currently supported: *
+       * IP:   Represents an IP Address. This can include both IPv4 and IPv6
+       *         addresses.
+       * * FQDN: Represents a Fully Qualified Domain Name. Default is IP
        */
       readonly addressType: string
 
@@ -18534,6 +18563,14 @@ export namespace meta {
        * Must be empty before the object is deleted from the registry. Each entry is an identifier
        * for the responsible component that will remove the entry from the list. If the
        * deletionTimestamp of the object is non-nil, entries in this list can only be removed.
+       * Finalizers may be processed and removed in any order.  Order is NOT enforced because it
+       * introduces significant risk of stuck finalizers. finalizers is a shared field, any actor
+       * with permission can reorder it. If the finalizer list is processed in order, then this can
+       * lead to a situation in which the component responsible for the first finalizer in the list
+       * is waiting for a signal (field value, external system, or other) produced by a component
+       * responsible for a finalizer later in the list, resulting in a deadlock. Without enforced
+       * ordering finalizers are free to order amongst themselves and are not vulnerable to ordering
+       * changes in the list.
        */
       readonly finalizers: string[]
 
@@ -19897,7 +19934,7 @@ export namespace policy {
 
       /**
        * Most recent generation observed when updating this PDB status. PodDisruptionsAllowed and
-       * other status informatio is valid only if observedGeneration equals to PDB's object
+       * other status information is valid only if observedGeneration equals to PDB's object
        * generation.
        */
       readonly observedGeneration: number

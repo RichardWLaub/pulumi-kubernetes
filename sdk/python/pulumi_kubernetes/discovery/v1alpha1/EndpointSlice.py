@@ -35,7 +35,10 @@ class EndpointSlice(pulumi.CustomResource):
     address_type: pulumi.Output[str]
     """
     addressType specifies the type of address carried by this EndpointSlice. All addresses in this
-    slice must be the same type. Default is IP
+    slice must be the same type. The following address types are currently supported: * IP:
+    Represents an IP Address. This can include both IPv4 and IPv6
+            addresses.
+    * FQDN: Represents a Fully Qualified Domain Name. Default is IP
     """
 
     endpoints: pulumi.Output[list]
@@ -66,7 +69,11 @@ class EndpointSlice(pulumi.CustomResource):
         :param pulumi.Input[list] endpoints: endpoints is a list of unique endpoints in this slice. Each slice may include a
                maximum of 1000 endpoints.
         :param pulumi.Input[str] address_type: addressType specifies the type of address carried by this EndpointSlice. All
-               addresses in this slice must be the same type. Default is IP
+               addresses in this slice must be the same type. The following address types are
+               currently supported: * IP:   Represents an IP Address. This can include both IPv4 and
+               IPv6
+                       addresses.
+               * FQDN: Represents a Fully Qualified Domain Name. Default is IP
         :param pulumi.Input[dict] metadata: Standard object's metadata.
         :param pulumi.Input[list] ports: ports specifies the list of network ports exposed by each endpoint in this slice.
                Each port must have a unique name. When ports is empty, it indicates that there are
